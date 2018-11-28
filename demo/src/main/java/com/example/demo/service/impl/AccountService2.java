@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.example.demo.entity.Account;
-import com.example.demo.service.IAccountService1;
 import com.google.common.base.Optional;
 
 public class AccountService2{
