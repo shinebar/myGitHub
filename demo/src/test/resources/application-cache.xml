@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd ">
+		
+   <context:component-scan base-package="com.example.demo.service;com.example.demo.cache"></context:component-scan>
+   <context:annotation-config/>
+   <!-- <bean id="accountCacheContext" class="com.example.demo.cache.CacheContext"/> --> 
+    <cache:annotation-driven/>
+    
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="default"/>
+                </bean>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="accountCache"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+     <!--自定义缓存实现  -->
+    <!-- <bean id="cacheManager" class="com.rollenholt.spring.cache.MyCacheManager">
+    	<property name="caches"> 
+      		<set> 
+        	 <bean  class="com.rollenholt.spring.cache.MyCache"
+               <property name="accountCache" /> 
+            </set> 
+        </property> 
+      </bean> -->
+    <bean id="accountService1" class="com.example.demo.service.impl.AccountService1"/>
+    <bean id="accountService2" class="com.example.demo.service.impl.AccountService2"/>
+    <bean id="accountService3" class="com.example.demo.service.impl.AccountService3"/>
+</beans>
