@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 
 @Entity
-@Table(name = "T_SEC_KILL_GOODS")
+@Table(name = "t_sec_kill_goods")
 public class SecKillGoods implements Serializable {
 	/**
 	 * 
@@ -18,7 +20,9 @@ public class SecKillGoods implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GenericGenerator(name = "PKUUID", strategy = "uuid2")
+	@GeneratedValue(generator = "PKUUID")
+	@Column(length = 36)
 	private String id;
 
 	/**
@@ -33,28 +37,46 @@ public class SecKillGoods implements Serializable {
 	@Column(nullable=false)
 	private String goodsName;
 
-
+	
+	public SecKillGoods() {
+	}
+	public SecKillGoods(String id, Integer remainNum) {
+		super();
+		this.id = id;
+		this.remainNum = remainNum;
+	}
+	public SecKillGoods(String id, String goodsName,Integer remainNum) {
+		super();
+		this.id = id;
+		this.remainNum = remainNum;
+		this.goodsName = goodsName;
+	}
 	public void setRemainNum(Integer remainNum) {
 		this.remainNum = remainNum;
 	}
 	public String getId() {
 		return id;
 	}
-	public void setId(String string) {
-		
+	public void setId(String id) {
+		this.id=id;
 	}
 	public String getGoodsName() {
 		return goodsName;
 	}
 
-	public void setGoodsName(String string) {
-		
+	public void setGoodsName(String goodsName) {
+		this.goodsName=goodsName;
 	}
 
-	public void setRemainNum(int i) {
-		
+	public void setRemainNum(int remainNum) {
+		this.remainNum=remainNum;
 	}
 	public Integer getRemainNum() {
 		return remainNum;
 	}
+	@Override
+	public String toString() {
+		return "SecKillGoods [id=" + id + ", remainNum=" + remainNum + ", goodsName=" + goodsName + "]";
+	}
+	
 }

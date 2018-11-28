@@ -9,7 +9,7 @@ import com.example.demo.entity.SecKillGoods;
 
 public interface ISecKillGoodsDao extends JpaRepository<SecKillGoods,String>{
 	 
-    @Query("update SecKillGoods g set g.remainNum = g.remainNum - ? where g.id=?")
+    @Query("update SecKillGoods g set g.remainNum = g.remainNum - ?2 where g.id = ?1 and g.remainNum>0")
     @Modifying(clearAutomatically = true)
     @Transactional
     int reduceStock(String id,Integer remainNum);
