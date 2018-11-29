@@ -20,8 +20,8 @@ public class SecKillGoods implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GenericGenerator(name = "PKUUID", strategy = "uuid2")
-	@GeneratedValue(generator = "PKUUID")
+	/*@GenericGenerator(name = "PKUUID", strategy = "uuid2")
+	@GeneratedValue(generator = "PKUUID")*/
 	@Column(length = 36)
 	private String id;
 
