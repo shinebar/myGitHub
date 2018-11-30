@@ -56,7 +56,7 @@
 		<dependency>
 		    <groupId>com.sun.jdmk</groupId>
 		    <artifactId>jmxtools</artifactId>
-		    <version>1.2</version>
+		    <version>1.2.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
 		<dependency>
@@ -87,9 +87,86 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!--swagger -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.8.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>2.8.0</version>
+		</dependency>
+		<!-- 如果支持jsp,把freemarker和thymeleaf注销掉 -->
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency> -->
+		<!-- spring boot 内置tomcat jsp支持 -->
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		</dependency>
+		<!-- websocket聊天室 -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<!-- 性能测试插件 -->
+		<dependency>
+		    <groupId>org.databene</groupId>
+		    <artifactId>contiperf</artifactId>
+		    <version>2.3.4</version>
+		    <scope>test</scope>
+		</dependency>
 	</dependencies>
-
+    
 	<build>
+	    <resources>
+	        <resource>
+		        <directory>src/main/resources</directory>
+		        <includes>
+		            <include>**/**</include>
+		        </includes>
+				<excludes>
+		           <exclude>src/main/resources/static/**</exclude>
+		        </excludes>
+		        <filtering>false</filtering>
+		    </resource>
+		    <!-- 打包时将jsp文件拷贝到META-INF目录下 -->
+		   <resource>
+		        <!-- 指定resources插件处理哪个目录下的资源文件 -->
+		        <directory>src/main/webapp</directory>
+		        <!-- 注意此次必须要放在此目录下才能被访问到 -->
+		       <targetPath>META-INF/resources</targetPath>
+		        <includes>
+		            <include>**/**</include>
+		        </includes>
+		        <filtering>false</filtering>
+		    </resource>
+		   <resource>
+		         <!--  指定resources插件处理哪个目录下的资源文件 -->
+		        <directory>src/main/resources/static</directory>
+		         <!--   注意此次必须要放在此目录下才能被访问到 -->
+		        <targetPath>META-INF/resources/static</targetPath>
+		        <includes>
+		            <include>**/**</include>
+		        </includes>
+		    </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
